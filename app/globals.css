@@ -1,0 +1,47 @@
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: false;
+}
+
+/* MentorLagbe dark theme: midnight navy + electric teal, glass surfaces */
+@plugin "daisyui/theme" {
+  name: "mentor-dark";
+  default: true;
+  prefersdark: true;
+  color-scheme: dark;
+  --color-base-100: #0b1020;
+  --color-base-200: #111a33;
+  --color-base-300: #1a2547;
+  --color-base-content: #e8eef9;
+  --color-primary: #2de1c2;
+  --color-primary-content: #06241f;
+  --color-secondary: #5b8cff;
+  --color-secondary-content: #ffffff;
+  --color-accent: #7be0ff;
+  --color-accent-content: #04202b;
+  --color-neutral: #1a2547;
+  --color-neutral-content: #e8eef9;
+  --color-info: #5b8cff;
+  --color-success: #2de1c2;
+  --color-warning: #ffc857;
+  --color-error: #ff6b81;
+  --radius-box: 1rem;
+  --radius-field: 0.6rem;
+}
+
+body {
+  background:
+    radial-gradient(60rem 40rem at 10% -10%, rgba(45, 225, 194, 0.18), transparent 60%),
+    radial-gradient(50rem 40rem at 100% 0%, rgba(91, 140, 255, 0.2), transparent 60%),
+    #0b1020;
+  min-height: 100vh;
+}
+
+/* Reusable glass surface */
+.glass {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 1.25rem;
+}
