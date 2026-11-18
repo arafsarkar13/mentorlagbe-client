@@ -1,4 +1,6 @@
 import "./globals.css";
+import { Toaster } from "react-hot-toast";
+import Navbar from "@/components/Navbar";
 
 export const metadata = {
   title: "MentorLagbe | Smart Tuition & Mentorship Platform",
@@ -9,7 +11,20 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" data-theme="mentor-dark">
-      <body className="font-sans antialiased">{children}</body>
+      <body className="font-sans antialiased">
+        <Navbar />
+        {children}
+        <Toaster
+          position="top-center"
+          toastOptions={{
+            style: {
+              background: "#111a33",
+              color: "#e8eef9",
+              border: "1px solid rgba(255,255,255,0.14)",
+            },
+          }}
+        />
+      </body>
     </html>
   );
 }
