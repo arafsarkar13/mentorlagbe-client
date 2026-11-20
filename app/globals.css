@@ -22,9 +22,13 @@
   --color-neutral: #1a2547;
   --color-neutral-content: #e8eef9;
   --color-info: #5b8cff;
+  --color-info-content: #06122e;
   --color-success: #2de1c2;
+  --color-success-content: #06241f;
   --color-warning: #ffc857;
+  --color-warning-content: #2b1d00;
   --color-error: #ff6b81;
+  --color-error-content: #2b0008;
   --radius-selector: 1rem;
   --radius-box: 1rem;
   --radius-field: 0.6rem;

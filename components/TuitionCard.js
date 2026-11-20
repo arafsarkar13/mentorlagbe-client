@@ -12,9 +12,9 @@ export default function TuitionCard({ tuition }) {
 
       <div className="flex flex-1 flex-col p-5">
         <div className="flex flex-wrap items-center gap-2">
-          <span className="badge badge-primary badge-outline">{tuition.subject}</span>
-          <span className="badge badge-ghost">{tuition.classLevel}</span>
-          <span className={`badge ${tuition.mode === "Online" ? "badge-info" : "badge-warning"}`}>
+          <span className="badge badge-primary badge-outline px-3">{tuition.subject}</span>
+          <span className="badge badge-ghost px-3">{tuition.classLevel}</span>
+          <span className={`badge px-3 ${tuition.mode === "Online" ? "badge-info" : "badge-warning"}`}>
             {tuition.mode}
           </span>
         </div>

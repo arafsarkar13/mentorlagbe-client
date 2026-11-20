@@ -77,9 +77,9 @@ export default function Navbar() {
           ) : user ? (
             <div className="dropdown dropdown-end">
               <button tabIndex={0} className="flex items-center gap-3 rounded-full p-1 hover:bg-white/10">
-                <div className="hidden text-right sm:block">
+                <div className="hidden flex-col items-end gap-1 sm:flex">
                   <p className="text-sm font-semibold leading-tight">{user.name}</p>
-                  <span className={`badge badge-sm capitalize ${roleBadge[user.role] || "badge-ghost"}`}>
+                  <span className={`badge badge-sm px-2 capitalize ${roleBadge[user.role] || "badge-ghost"}`}>
                     {user.role}
                   </span>
                 </div>
