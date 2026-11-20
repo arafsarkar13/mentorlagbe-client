@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { getPublic, formatFee } from "@/lib/publicApi";
+import ApplyBox from "@/components/ApplyBox";
 
 export const metadata = { title: "Tuition Details | MentorLagbe" };
 
@@ -57,12 +58,7 @@ export default async function TuitionDetailsPage({ params }) {
           <div className="glass p-6">
             <p className="text-sm text-base-content/60">Monthly Fee</p>
             <p className="text-4xl font-bold text-primary">{formatFee(tuition.monthlyFee)}</p>
-            <button className="btn btn-primary mt-5 w-full" disabled>
-              Apply Now
-            </button>
-            <p className="mt-3 text-xs text-base-content/60">
-              The application form is coming in the next update.
-            </p>
+            <ApplyBox tuitionId={String(tuition._id)} />
           </div>
 
           <div className="glass p-6">
