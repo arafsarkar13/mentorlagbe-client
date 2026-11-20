@@ -1,7 +1,6 @@
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import SiteShell from "@/components/SiteShell";
 
 export const metadata = {
   title: "MentorLagbe | Smart Tuition & Mentorship Platform",
@@ -13,9 +12,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" data-theme="mentor-dark">
       <body className="font-sans antialiased">
-        <Navbar />
-        {children}
-        <Footer />
+        <SiteShell>{children}</SiteShell>
         <Toaster
           position="top-center"
           toastOptions={{
