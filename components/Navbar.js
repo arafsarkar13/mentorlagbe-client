@@ -55,9 +55,12 @@ export default function Navbar() {
             </button>
             <ul tabIndex={0} className="menu dropdown-content glass mt-3 w-56 bg-base-200 p-2 shadow">
               {links}
+              {!user && !isPending && (
+                <li className="sm:hidden"><Link href="/sign-in">Sign In</Link></li>
+              )}
             </ul>
           </div>
-          <Link href="/" className="text-2xl font-bold">
+          <Link href="/" className="whitespace-nowrap text-2xl font-bold">
             Mentor<span className="text-primary">Lagbe</span>
           </Link>
         </div>
@@ -101,7 +104,7 @@ export default function Navbar() {
             </div>
           ) : (
             <>
-              <Link href="/sign-in" className="btn btn-ghost btn-sm">Sign In</Link>
+              <Link href="/sign-in" className="btn btn-ghost btn-sm hidden sm:inline-flex">Sign In</Link>
               <Link href="/sign-up" className="btn btn-primary btn-sm">Sign Up</Link>
             </>
           )}
