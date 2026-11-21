@@ -5,34 +5,10 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { authClient } from "@/lib/auth-client";
 import { apiFetch } from "@/lib/api";
+import { resizeImage } from "@/lib/image";
 
 const MAX_IMAGE_SIZE = 5 * 1024 * 1024; // 5 MB original file
 
-// Shrinks the picture (max 800px) and turns it into a small JPEG text string.
-// This keeps the upload fast and well under the server's size limit.
-function resizeImage(file, maxSize = 800) {
-  return new Promise((resolve, reject) => {
-    const img = new Image();
-    const url = URL.createObjectURL(file);
-
-    img.onload = () => {
-      const scale = Math.min(1, maxSize / Math.max(img.width, img.height));
-      const canvas = document.createElement("canvas");
-      canvas.width = Math.round(img.width * scale);
-      canvas.height = Math.round(img.height * scale);
-
-      const ctx = canvas.getContext("2d");
-      ctx.fillStyle = "#ffffff"; // white background for transparent PNGs
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-
-      URL.revokeObjectURL(url);
-      resolve(canvas.toDataURL("image/jpeg", 0.85));
-    };
-    img.onerror = () => reject(new Error("Could not read this image"));
-    img.src = url;
-  });
-}
 
 export default function ProfileForm({ user }) {
   const router = useRouter();
