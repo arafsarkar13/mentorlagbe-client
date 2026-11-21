@@ -10,8 +10,8 @@ tutors lack a structured place to show their batches. MentorLagbe solves both in
 ## Live Links
 - **Live site:** https://mentorlaaagbe.vercel.app
 - **Server API:** https://mentorlaaagbe-server.vercel.app
-- **Client repository:** https://github.com/<your-username>/mentorlagbe-client
-- **Server repository:** https://github.com/<your-username>/mentorlagbe-server
+- **Client repository:** https://github.com/arafsarkar13/mentorlagbe-client
+- **Server repository:** https://github.com/arafsarkar13/mentorlagbe-server
 
 ## Demo Accounts
 | Role | Email | Password |
