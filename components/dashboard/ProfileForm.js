@@ -6,15 +6,31 @@ import toast from "react-hot-toast";
 import { authClient } from "@/lib/auth-client";
 import { apiFetch } from "@/lib/api";
 
-const MAX_IMAGE_SIZE = 2 * 1024 * 1024; // 2 MB
+const MAX_IMAGE_SIZE = 5 * 1024 * 1024; // 5 MB original file
 
-// Turns a file into a base64 text string we can send to the server
-function fileToBase64(file) {
+// Shrinks the picture (max 800px) and turns it into a small JPEG text string.
+// This keeps the upload fast and well under the server's size limit.
+function resizeImage(file, maxSize = 800) {
   return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = reject;
-    reader.readAsDataURL(file);
+    const img = new Image();
+    const url = URL.createObjectURL(file);
+
+    img.onload = () => {
+      const scale = Math.min(1, maxSize / Math.max(img.width, img.height));
+      const canvas = document.createElement("canvas");
+      canvas.width = Math.round(img.width * scale);
+      canvas.height = Math.round(img.height * scale);
+
+      const ctx = canvas.getContext("2d");
+      ctx.fillStyle = "#ffffff"; // white background for transparent PNGs
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+      URL.revokeObjectURL(url);
+      resolve(canvas.toDataURL("image/jpeg", 0.85));
+    };
+    img.onerror = () => reject(new Error("Could not read this image"));
+    img.src = url;
   });
 }
 
@@ -43,7 +59,7 @@ export default function ProfileForm({ user }) {
       return;
     }
     if (selected.size > MAX_IMAGE_SIZE) {
-      toast.error("Image must be smaller than 2 MB");
+      toast.error("Image must be smaller than 5 MB");
       return;
     }
     setFile(selected);
@@ -68,7 +84,7 @@ export default function ProfileForm({ user }) {
 
       // 1. Upload the new picture (through our server, which uses ImgBB)
       if (file) {
-        const base64 = await fileToBase64(file);
+        const base64 = await resizeImage(file);
         const data = await apiFetch("/api/upload", {
           method: "POST",
           body: JSON.stringify({ image: base64 }),
@@ -111,7 +127,7 @@ export default function ProfileForm({ user }) {
         <div>
           <label className="mb-1 block text-sm">Profile Picture</label>
           <input type="file" accept="image/*" onChange={handleFile} className="file-input file-input-bordered file-input-sm w-full max-w-xs" />
-          <p className="mt-1 text-xs text-base-content/60">JPG or PNG, up to 2 MB.</p>
+          <p className="mt-1 text-xs text-base-content/60">JPG or PNG, up to 5 MB (resized automatically).</p>
         </div>
       </div>
 
